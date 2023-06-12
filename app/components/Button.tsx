@@ -19,14 +19,16 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`w-full transition rounded-lg relatie disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-80 ${
+      disabled={disabled}
+      onClick={onClick}
+      className={`relative w-full rounded-lg transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-70 ${
         outline
-          ? "bg-white border-black text-black"
-          : "bg-rose-500 border-black text-white"
+          ? "border-black bg-white text-black"
+          : "border-black bg-rose-500 text-white"
       } ${
         small
-          ? "py-1 text-sm font-light border-[1px]"
-          : "py-3 text-md font-semibold border-2"
+          ? "border-[1px] py-1 text-sm font-light"
+          : "text-md border-2 py-3 font-semibold"
       }
       `}
     >
