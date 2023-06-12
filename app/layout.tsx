@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import { RegisterModal } from "./components/modals/RegisterModal";
 import { ToastProvider } from "./providers/ToastProvider";
+import { LoginModal } from "./components/modals/LoginModal";
 const poppins = Poppins({ weight: "900", subsets: ["latin"] });
 
 const font = Nunito({
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={font.className}>
         <ToastProvider />
         <RegisterModal />
+        <LoginModal />
         <Navbar />
         {children}
       </body>
