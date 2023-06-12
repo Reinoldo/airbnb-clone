@@ -1,8 +1,13 @@
-import { Poppins, Inter, Rubik_Puddles } from "next/font/google";
+import { Poppins, Inter, Nunito } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
+import { RegisterModal } from "./components/modals/RegisterModal";
+import { ToastProvider } from "./providers/ToastProvider";
 const poppins = Poppins({ weight: "900", subsets: ["latin"] });
-const rubik = Rubik_Puddles({ weight: "400", subsets: ["cyrillic"] });
+
+const font = Nunito({
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Airbnb",
@@ -16,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={font.className}>
+        <ToastProvider />
+        <RegisterModal />
         <Navbar />
         {children}
       </body>
