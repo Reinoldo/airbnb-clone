@@ -1,3 +1,5 @@
+"use client";
+
 import { IconType } from "react-icons";
 
 interface ButtonProps {
@@ -10,7 +12,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  icon,
+  icon: Icon,
   label,
   onClick,
   disabled,
@@ -32,7 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
       }
       `}
     >
-      {" "}
+      {Icon && <Icon size={24} className="absolute left-4 top-3" />}
       {label}
     </button>
   );

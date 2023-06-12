@@ -56,32 +56,32 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-neutral-800/70 focus:outline-none">
-        <div className="relative w-full h-full mx-auto my-6 md:w-4/6 lg:w-3/6 xl:w-2/5 lg:h-uto md:h-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-800/70 focus:outline-none">
+        <div className="lg:h-uto relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:w-3/6 xl:w-2/5">
           {/*Content*/}
           <div
-            className={`translate duration-300 h-full ${
+            className={`translate h-full duration-300 ${
               showModal
                 ? "translate-y-0 opacity-100"
                 : "translate-y-full opacity-0"
             }  `}
           >
-            <div className="relative flex flex-col w-full h-full bg-white border-0 rounded-lg shadow-lg outline-none translate lg:h-auto md:h-auto focus:outline-none">
+            <div className="translate relative flex h-full w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none md:h-auto lg:h-auto">
               {/* HEADER */}
-              <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
+              <div className="relative flex items-center justify-center rounded-t border-b-[1px] p-6">
                 <button
                   onClick={handleClose}
-                  className="absolute p-1 transition border-0 hover:opacity-70 left-9"
+                  className="absolute left-9 border-0 p-1 transition hover:opacity-70"
                 >
                   <IoMdClose size={18} />
                 </button>
                 <div className="text-lg font-semibold">{title}</div>
               </div>
               {/* BODY */}
-              <div className="relative p-6 flex-auuto">{body}</div>
+              <div className="relative flex-auto p-6">{body}</div>
               {/* FOOTER */}
               <div className="flex flex-col gap-2 p-6">
-                <div className="flex items-center w-full gap-4">
+                <div className="flex w-full items-center gap-4">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       outline
@@ -96,6 +96,7 @@ export const Modal: React.FC<ModalProps> = ({
                     label={actionLabel}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
