@@ -2,8 +2,8 @@
 import { signIn } from "next-auth/react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useCallback, useState } from "react";
-import { useForm, SubmitHandler, FieldValues, set } from "react-hook-form";
+import { useState } from "react";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { Modal } from "./Modal";
 import { Heading } from "../Heading";
 import { Input } from "../inputs/Input";
@@ -71,13 +71,13 @@ export const LoginModal = () => {
         icon={FcGoogle}
         outline
         label="Continuar com Google"
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <Button
         icon={AiFillGithub}
         outline
         label="Continuar com Github"
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div className="mt-3 text-center font-light text-neutral-500">
         <div className="flex items-center justify-center gap-2">
