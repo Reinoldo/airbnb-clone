@@ -8,6 +8,7 @@ import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
+import { useRentModal } from "@/app/hooks/useRentModal";
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
@@ -16,16 +17,22 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const rentOpen = useCallback(() => {
+    if (!currentUser) return null;
+    rentModal.onOpen();
+  }, [currentUser, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={rentOpen}
           className="hidden cursor-pointer rounded-full px-4 py-3 text-sm font-semibold transition hover:bg-neutral-100 hover:shadow-md md:block"
         >
           Anuncie seu espaço no Airbnb

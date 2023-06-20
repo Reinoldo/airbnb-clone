@@ -5,6 +5,7 @@ import { RegisterModal } from "./components/modals/RegisterModal";
 import { ToastProvider } from "./providers/ToastProvider";
 import { LoginModal } from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
+import { RentModal } from "./components/modals/RentModal";
 const poppins = Poppins({ weight: "900", subsets: ["latin"] });
 
 const font = Nunito({
@@ -27,6 +28,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ToastProvider />
+        <RentModal />
         <RegisterModal />
         <LoginModal />
         <Navbar currentUser={currentUser} />

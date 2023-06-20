@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { Modal } from "./Modal";
 import { Heading } from "../Heading";
@@ -11,9 +11,11 @@ import { Input } from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import { Button } from "../Button";
 import { signIn } from "next-auth/react";
+import { useLoginModal } from "@/app/hooks/useLoginModal";
 
 export const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -44,6 +46,11 @@ export const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const toogle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -92,7 +99,7 @@ export const RegisterModal = () => {
         <div className="flex items-center justify-center gap-2">
           <div>Já tem uma conta?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={toogle}
             className="cursor-pointer text-neutral-800 underline"
           >
             Entre

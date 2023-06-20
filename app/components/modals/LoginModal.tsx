@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { Modal } from "./Modal";
 import { Heading } from "../Heading";
@@ -11,10 +11,12 @@ import { toast } from "react-hot-toast";
 import { Button } from "../Button";
 import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
+import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 
 export const LoginModal = () => {
   const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -42,6 +44,11 @@ export const LoginModal = () => {
       }
     });
   };
+
+  const toogle = useCallback(() => {
+    registerModal.onOpen();
+    loginModal.onClose();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -81,12 +88,12 @@ export const LoginModal = () => {
       />
       <div className="mt-3 text-center font-light text-neutral-500">
         <div className="flex items-center justify-center gap-2">
-          <div>Já tem uma conta?</div>
+          <div>Novo no Airbnb?</div>
           <div
-            onClick={loginModal.onClose}
+            onClick={toogle}
             className="cursor-pointer text-neutral-800 underline"
           >
-            Entre
+            Cadastre-se
           </div>
         </div>
       </div>
