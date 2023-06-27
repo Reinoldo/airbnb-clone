@@ -7,6 +7,8 @@ import { Heading } from "../Heading";
 import { categories } from "../navbar/Categories";
 import { CategoryInput } from "../inputs/CategoryInput";
 import { useState, useMemo } from "react";
+import { experimental_useFormStatus } from "react-dom";
+import { CountrySelect } from "../inputs/CountrySelect";
 
 enum STEPS {
   CATEGORY = 0,
@@ -43,8 +45,6 @@ export const RentModal = () => {
   const category = watch("category");
 
   const setCustomValue = (id: string, value: any) => {
-    console.log("value", value);
-
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -69,7 +69,7 @@ export const RentModal = () => {
     return "Voltar";
   }, [step]);
 
-  const bodyContent = (
+  let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
         title="Qual destas opções melhor descreve o seu lugar?"
@@ -90,14 +90,28 @@ export const RentModal = () => {
     </div>
   );
 
-  const footer = <div>footer</div>;
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div>
+        {" "}
+        <Heading
+          title="Onde fica sua acomodação?"
+          subTitle="Seu endereço só é compartilhado com os hóspedes depois que a reserva é confirmada."
+        />
+        <CountrySelect onChange={() => {}} />
+      </div>
+    );
+  }
+
   return (
     <Modal
       isOpen={rentModal.isOpen}
       title="Anuncie seu espaço no Airbnb"
-      actionLabel="Enviar"
+      actionLabel={actionLabel}
+      secondaryActionLabel={secondaryActionLabel}
+      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       body={bodyContent}
     />
   );

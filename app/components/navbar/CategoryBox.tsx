@@ -44,7 +44,6 @@ export const CategoryBox: React.FC<CategoryBoxProps> = ({
     );
 
     router.push(url);
-    console.log(updatedQuery);
   }, [router, label, params]);
 
   return (
