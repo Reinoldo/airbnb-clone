@@ -25,6 +25,7 @@ export const CountrySelect: React.FC<CountrySelectProps> = ({
   return (
     <div>
       <Select
+        isClearable
         placeholder="Qualquer lugar"
         value={value}
         onChange={(value) => onChange(value as CountrySelectValue)}

@@ -7,8 +7,9 @@ import { Heading } from "../Heading";
 import { categories } from "../navbar/Categories";
 import { CategoryInput } from "../inputs/CategoryInput";
 import { useState, useMemo } from "react";
-import { experimental_useFormStatus } from "react-dom";
 import { CountrySelect } from "../inputs/CountrySelect";
+
+import dynamic from "next/dynamic";
 
 enum STEPS {
   CATEGORY = 0,
@@ -43,6 +44,15 @@ export const RentModal = () => {
   });
 
   const category = watch("category");
+  const location = watch("location");
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../Map").then((map) => map.Map), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -98,7 +108,11 @@ export const RentModal = () => {
           title="Onde fica sua acomodação?"
           subTitle="Seu endereço só é compartilhado com os hóspedes depois que a reserva é confirmada."
         />
-        <CountrySelect onChange={() => {}} />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <Map center={location?.latlng} />
       </div>
     );
   }
