@@ -10,6 +10,7 @@ import { useState, useMemo } from "react";
 import { CountrySelect } from "../inputs/CountrySelect";
 
 import dynamic from "next/dynamic";
+import { Counter } from "../inputs/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -45,6 +46,9 @@ export const RentModal = () => {
 
   const category = watch("category");
   const location = watch("location");
+  const guestCount = watch("guestCount");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
 
   const Map = useMemo(
     () =>
@@ -113,6 +117,35 @@ export const RentModal = () => {
           onChange={(value) => setCustomValue("location", value)}
         />
         <Map center={location?.latlng} />
+      </div>
+    );
+  }
+
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Compartilhe algumas informações básicas do seu cantinho"
+          subTitle="Que comodidades você tem?"
+        />
+        <Counter
+          title="Número de hospedes"
+          subtitle="Quantos hóspedes?"
+          onChange={(value) => setCustomValue("guestCount", value)}
+          value={guestCount}
+        />
+        <Counter
+          title="Número de quartos"
+          subtitle="Quantos quartos?"
+          onChange={(value) => setCustomValue("roomCount", value)}
+          value={roomCount}
+        />
+        <Counter
+          title="Quantidade de banheiros"
+          subtitle="Quantos banheiros?"
+          onChange={(value) => setCustomValue("bathroomCount", value)}
+          value={bathroomCount}
+        />
       </div>
     );
   }
